@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/authorization"
+        style="@style/Title"/>
+
+    <EditText
+        android:id="@+id/login_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_horizontal"
+        android:hint="@string/authorization_login"
+        android:maxLength="15"
+        style="@style/InputText"/>
+
+    <EditText
+        android:id="@+id/password_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_horizontal"
+        android:hint="@string/authorization_password"
+        android:maxLength="20"
+        style="@style/InputText"/>
+
+    <Button
+        android:id="@+id/authorize_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/universal_space_top"
+        android:background="@color/teal_200"
+        android:paddingHorizontal="@dimen/space_horizontal"
+        android:text="@string/authorization_button"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_big_text_size"
+        android:enabled="false"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:id="@+id/registration_btn"
+        android:layout_marginTop="@dimen/registration_button_margin_top"
+        android:layout_marginEnd="@dimen/space_horizontal"
+        android:text="@string/register_button"
+        android:textColor="@color/blue_200" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/about_application_tv"
+        android:text="@string/about_application_text"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/application_margin_top"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tic_tac_toe_button"
+        android:layout_gravity="center"
+        android:id="@+id/tic_tac_toe_btn"
+        />
+
+</LinearLayout>

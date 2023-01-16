@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="big_text_size">36sp</dimen>
+    <dimen name="login_margin_medium">48dp</dimen>
+    <dimen name="space_horizontal">16dp</dimen>
+    <dimen name="universal_space_top">32dp</dimen>
+    <dimen name="login_margin">12dp</dimen>
+    <dimen name="button_big_text_size">40sp</dimen>
+    <dimen name="registration_button_margin_top">16dp</dimen>
+    <dimen name="application_margin_top">48dp</dimen>
+    <dimen name="input_text_size">16sp</dimen>
+    <dimen name="input_text_margin_top">8dp</dimen>
+    <dimen name="tic_tac_toe_button_size">100dp</dimen>
+    <dimen name="tic_tac_toe_top_margin">12dp</dimen>
+    <dimen name="tic_tac_toe_right_left_margin">12dp</dimen>
+</resources>

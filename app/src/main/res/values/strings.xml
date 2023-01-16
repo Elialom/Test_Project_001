@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">MyApplication_1</string>
+    <string name="hello_all_people">Привет всем людям</string>
+    <string name="send_mail">Отправить письмо</string>
+    <string name="book_name">Название книги</string>
+    <string name="animal_name">название животного</string>
+    <string name="any_button">некоторая кнопка</string>
+    <string name="pressed_button">кнопка нажата</string>
+    <string name="retry_button">retry sending message</string>
+    <string name="description_information">please insert your email address</string>
+    <string name="send_email">SEND EMAIL</string>
+    <string name="authorization">Authorization</string>
+    <string name="authorization_login">Please enter login details</string>
+    <string name="authorization_password">Please enter password</string>
+    <string name="authorization_button">Authorize</string>
+    <string name="register_button">Register</string>
+    <string name="registration_title">Registration</string>
+    <string name="about_application_text">Application Information</string>
+    <string name="about_application_title">About Application</string>
+    <string name="tic_tac_toe_button">Tic Tac Toe</string>
+    <string name="tic_tac_toe_x">X</string>
+    <string name="tic_tac_toe_o">O</string>
+</resources>
