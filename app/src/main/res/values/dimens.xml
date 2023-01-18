@@ -13,4 +13,6 @@
     <dimen name="tic_tac_toe_button_size">100dp</dimen>
     <dimen name="tic_tac_toe_top_margin">12dp</dimen>
     <dimen name="tic_tac_toe_right_left_margin">12dp</dimen>
+    <dimen name="tic_tac_toe_start_button">120dp</dimen>
+    <dimen name="tic_tac_toe_button_margin">200dp</dimen>
 </resources>
