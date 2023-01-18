@@ -20,4 +20,5 @@
     <string name="tic_tac_toe_button">Tic Tac Toe</string>
     <string name="tic_tac_toe_x">X</string>
     <string name="tic_tac_toe_o">O</string>
+    <string name="tic_tac_toe_start_button">Restart</string>
 </resources>
