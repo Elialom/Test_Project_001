@@ -94,10 +94,15 @@ class TicTacToeActivity : AppCompatActivity() {
             showGameField(stateField)
         }
     }
+
     fun showGameField(stateField: MutableList<PlayableCell>) {
-        stateField.forEach{ cell->
+        stateField.forEach { cell ->
             println("!!! ${cell.x} ${cell.y} ${cell.state}")
         }
         println("!!! ==========")
+    }
+
+    fun checkVictory() {
+
     }
 }
