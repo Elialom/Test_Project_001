@@ -39,6 +39,35 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_btn_4"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tic_tac_toe_button_size"
+            android:layout_marginEnd="@dimen/registration_button_margin_top"
+            android:layout_weight="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_btn_5"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tic_tac_toe_button_size"
+            android:layout_marginEnd="@dimen/registration_button_margin_top"
+            android:layout_weight="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_btn_6"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tic_tac_toe_button_size"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tic_tac_toe_btn_7"
             style="@style/Button"
             android:layout_width="match_parent"
@@ -69,5 +98,5 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/tic_tac_toe_button_margin"
         android:background="@color/dark_blue"
-        android:text="@string/tic_tac_toe_start_button"/>
+        android:text="@string/tic_tac_toe_start_button" />
 </LinearLayout>

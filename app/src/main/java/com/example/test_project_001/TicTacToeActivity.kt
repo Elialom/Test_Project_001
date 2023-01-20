@@ -2,7 +2,6 @@ package com.example.test_project_001
 
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Filter
 import androidx.appcompat.app.AppCompatActivity
 
 class TicTacToeActivity : AppCompatActivity() {
@@ -18,6 +17,7 @@ class TicTacToeActivity : AppCompatActivity() {
         val button7 = findViewById<Button>(R.id.tic_tac_toe_btn_7)
         val button8 = findViewById<Button>(R.id.tic_tac_toe_btn_8)
         val button9 = findViewById<Button>(R.id.tic_tac_toe_btn_9)
+        val restartButton = findViewById<Button>(R.id.tic_tac_toe_start)
         val stateField = mutableListOf<PlayableCell>(
             PlayableCell(0, 0, State.EMPTY),
             PlayableCell(1, 0, State.EMPTY),
@@ -27,7 +27,7 @@ class TicTacToeActivity : AppCompatActivity() {
             PlayableCell(2, 1, State.EMPTY),
             PlayableCell(0, 2, State.EMPTY),
             PlayableCell(1, 2, State.EMPTY),
-            PlayableCell(2, 2, State.EMPTY),
+            PlayableCell(2, 2, State.EMPTY)
         )
         button1.setOnClickListener() {
             showGameField(stateField)
@@ -88,18 +88,38 @@ class TicTacToeActivity : AppCompatActivity() {
 
         button9.setOnClickListener() {
             showGameField(stateField)
-            button9.setText(R.string.tic_tac_toe_x)
+
             stateField.filter { it.x == 2 && it.y == 2 }
             stateField.find { it.x == 2 && it.y == 2 }?.state = State.PLAYER
             showGameField(stateField)
         }
+
+
+        var stateEmpty = createEmptyState()
+        restartButton.setOnClickListener() {
+            stateEmpty = createEmptyState()
+        }
+    }
+    fun createEmptyState():List<PlayableCell> {
+        return mutableListOf<PlayableCell>(
+        PlayableCell(0, 0, State.EMPTY),
+        PlayableCell(1, 0, State.EMPTY),
+        PlayableCell(2, 0, State.EMPTY),
+        PlayableCell(0, 1, State.EMPTY),
+        PlayableCell(1, 1, State.EMPTY),
+        PlayableCell(2, 1, State.EMPTY),
+        PlayableCell(0, 2, State.EMPTY),
+        PlayableCell(1, 2, State.EMPTY),
+        PlayableCell(2, 2, State.EMPTY)
+        )
     }
 
     fun showGameField(stateField: MutableList<PlayableCell>) {
         stateField.forEach { cell ->
-            println("!!! ${cell.x} ${cell.y} ${cell.state}")
+            if (cell.state == State.PLAYER) {
+
+            }
         }
-        println("!!! ==========")
     }
 
     fun checkVictory() {
