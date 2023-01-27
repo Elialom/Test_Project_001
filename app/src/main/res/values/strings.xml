@@ -21,4 +21,5 @@
     <string name="tic_tac_toe_x">X</string>
     <string name="tic_tac_toe_o">O</string>
     <string name="tic_tac_toe_start_button">Restart</string>
+    <string name="tic_tac_toe_empty"></string>
 </resources>
