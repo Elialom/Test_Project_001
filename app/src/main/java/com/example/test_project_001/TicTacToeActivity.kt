@@ -128,7 +128,7 @@ class TicTacToeActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkVictory() {
+    private fun checkVictory(typePlayer: State) {
         var count: Int = 0
         for (y in 0..2) {
             for (x in 0..2) {
