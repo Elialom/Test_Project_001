@@ -138,13 +138,46 @@ class TicTacToeActivity : AppCompatActivity() {
                 }
             }
             if (count == 3) {
-                println("!!! Player 1 won")
+                println("!!! Player 1 won horizontally")
                 createEmptyState()
                 showGameField()
                 count = 0
             } else {
                 count = 0
             }
+        }
+
+        for (x in 0..2) {
+            for (y in 0..2) {
+                if (stateField.find { it.x == x && it.y == y }?.state == State.PLAYER) {
+                    count++
+                    println("Count has been added")
+                }
+            }
+            if (count == 3) {
+                println("!!! Player 1 won vertically")
+                createEmptyState()
+                showGameField()
+                count = 0
+            } else {
+                count = 0
+            }
+        }
+        if (stateField.find { it.x == 0 && it.y == 0 }?.state == State.PLAYER &&
+            stateField.find { it.x == 1 && it.y == 1 }?.state == State.PLAYER &&
+            stateField.find { it.x == 2 && it.y == 2 }?.state == State.PLAYER
+        ) {
+            println("!!! Player 1 won diagonally")
+            createEmptyState()
+            showGameField()
+        }
+        if (stateField.find { it.x == 2 && it.y == 0 }?.state == State.PLAYER &&
+            stateField.find { it.x == 1 && it.y == 1 }?.state == State.PLAYER &&
+            stateField.find { it.x == 0 && it.y == 2 }?.state == State.PLAYER
+        ) {
+            println("!!! Player 1 won diagonally")
+            createEmptyState()
+            showGameField()
         }
 
         //stateField.find { it.x == 0 && it.y == 0 }?.state = State.PLAYER//
