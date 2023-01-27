@@ -128,7 +128,7 @@ class TicTacToeActivity : AppCompatActivity() {
         }
     }
 
-    fun checkVictory() {
+    private fun checkVictory() {
         var count: Int = 0
         for (y in 0..2) {
             for (x in 0..2) {
@@ -141,6 +141,9 @@ class TicTacToeActivity : AppCompatActivity() {
                 println("!!! Player 1 won")
                 createEmptyState()
                 showGameField()
+                count = 0
+            } else {
+                count = 0
             }
         }
 
