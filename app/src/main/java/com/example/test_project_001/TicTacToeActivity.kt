@@ -41,48 +41,72 @@ class TicTacToeActivity : AppCompatActivity() {
             stateField.find { it.x == 0 && it.y == 0 }?.state = State.PLAYER
             showGameField()
             checkVictory(State.PLAYER)
+            if (!checkVictory(State.PLAYER)) {
+                computerTurn()
+            }
         }
         button2.setOnClickListener() {
             stateField.filter { it.x == 1 && it.y == 0 }
             stateField.find { it.x == 1 && it.y == 0 }?.state = State.PLAYER
             showGameField()
             checkVictory(State.PLAYER)
+            if (!checkVictory(State.PLAYER)) {
+                computerTurn()
+            }
         }
         button3.setOnClickListener() {
             stateField.filter { it.x == 2 && it.y == 0 }
             stateField.find { it.x == 2 && it.y == 0 }?.state = State.PLAYER
             showGameField()
             checkVictory(State.PLAYER)
+            if (!checkVictory(State.PLAYER)) {
+                computerTurn()
+            }
         }
         button4.setOnClickListener() {
             stateField.filter { it.x == 0 && it.y == 1 }
             stateField.find { it.x == 0 && it.y == 1 }?.state = State.PLAYER
             showGameField()
             checkVictory(State.PLAYER)
+            if (!checkVictory(State.PLAYER)) {
+                computerTurn()
+            }
         }
         button5.setOnClickListener() {
             stateField.filter { it.x == 1 && it.y == 1 }
             stateField.find { it.x == 1 && it.y == 1 }?.state = State.PLAYER
             showGameField()
             checkVictory(State.PLAYER)
+            if (!checkVictory(State.PLAYER)) {
+                computerTurn()
+            }
         }
         button6.setOnClickListener() {
             stateField.filter { it.x == 2 && it.y == 1 }
             stateField.find { it.x == 2 && it.y == 1 }?.state = State.PLAYER
             showGameField()
             checkVictory(State.PLAYER)
+            if (!checkVictory(State.PLAYER)) {
+                computerTurn()
+            }
         }
         button7.setOnClickListener() {
             stateField.filter { it.x == 0 && it.y == 2 }
             stateField.find { it.x == 0 && it.y == 2 }?.state = State.PLAYER
             showGameField()
             checkVictory(State.PLAYER)
+            if (!checkVictory(State.PLAYER)) {
+                computerTurn()
+            }
         }
         button8.setOnClickListener() {
             stateField.filter { it.x == 1 && it.y == 2 }
             stateField.find { it.x == 1 && it.y == 2 }?.state = State.PLAYER
             showGameField()
             checkVictory(State.PLAYER)
+            if (!checkVictory(State.PLAYER)) {
+                computerTurn()
+            }
         }
 
         button9.setOnClickListener() {
@@ -90,6 +114,9 @@ class TicTacToeActivity : AppCompatActivity() {
             stateField.find { it.x == 2 && it.y == 2 }?.state = State.PLAYER
             showGameField()
             checkVictory(State.PLAYER)
+            if (!checkVictory(State.PLAYER)) {
+                computerTurn()
+            }
         }
 
         restartButton.setOnClickListener() {
@@ -128,7 +155,7 @@ class TicTacToeActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkVictory(typePlayer: State) {
+    private fun checkVictory(typePlayer: State): Boolean {
         var count: Int = 0
         for (y in 0..2) {
             for (x in 0..2) {
@@ -142,6 +169,7 @@ class TicTacToeActivity : AppCompatActivity() {
                 createEmptyState()
                 showGameField()
                 count = 0
+                return true
             } else {
                 count = 0
             }
@@ -152,6 +180,7 @@ class TicTacToeActivity : AppCompatActivity() {
                 if (stateField.find { it.x == x && it.y == y }?.state == typePlayer) {
                     count++
                     println("Count has been added")
+
                 }
             }
             if (count == 3) {
@@ -159,6 +188,7 @@ class TicTacToeActivity : AppCompatActivity() {
                 createEmptyState()
                 showGameField()
                 count = 0
+                return true
             } else {
                 count = 0
             }
@@ -170,6 +200,7 @@ class TicTacToeActivity : AppCompatActivity() {
             println("!!! Player 1 won diagonally")
             createEmptyState()
             showGameField()
+            return true
         }
         if (stateField.find { it.x == 2 && it.y == 0 }?.state == typePlayer &&
             stateField.find { it.x == 1 && it.y == 1 }?.state == typePlayer &&
@@ -178,8 +209,39 @@ class TicTacToeActivity : AppCompatActivity() {
             println("!!! Player 1 won diagonally")
             createEmptyState()
             showGameField()
+            return true
         }
 
         //stateField.find { it.x == 0 && it.y == 0 }?.state = State.PLAYER//
+        return false
+    }
+
+    fun getCountStep(): Int {
+        println("!!! getCountStep")
+        var countStep: Int = 0
+        for (y in 0..2) {
+            for (x in 0..2) {
+             if (stateField.find { it.x == x && it.y == y }?.state != State.EMPTY) {
+                 countStep++
+             }
+            }
+        }
+        println("!!! countStep $countStep")
+        return countStep
+
+    }
+
+    fun computerTurn() {
+    if (getCountStep() == 1) {
+        println("!!! it")
+        if (stateField.find { it.x == 1 && it.y == 1}?.state == State.PLAYER) {
+            stateField.find { it.x == 0 && it.y == 1}?.state = State.COMPUTER
+        }
+        else {
+            stateField.find {it.x == 1 && it.y == 1}?.state = State.COMPUTER
+        }
+        showGameField()
+    }
+        println("!!! functionName ${getCountStep()}")
     }
 }
