@@ -41,7 +41,15 @@ class TicTacToeActivity : AppCompatActivity() {
             showGameField()
             checkVictory(State.PLAYER)
             if (!checkVictory(State.PLAYER)) {
-                computerTurn()
+                var computerCoordinates = computerVictoryCheck()
+                if (computerCoordinates != null) {
+                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+                        State.COMPUTER
+                    println("!!! coordinate1")
+                }
+                else {
+                    computerTurn()
+                }
             }
         }
         button2.setOnClickListener() {
@@ -49,7 +57,14 @@ class TicTacToeActivity : AppCompatActivity() {
             showGameField()
             checkVictory(State.PLAYER)
             if (!checkVictory(State.PLAYER)) {
-                computerTurn()
+                var computerCoordinates = computerVictoryCheck()
+                if (computerCoordinates != null) {
+                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+                        State.COMPUTER
+                    println("!!! coordinate2")
+                } else {
+                    computerTurn()
+                }
             }
         }
         button3.setOnClickListener() {
@@ -57,7 +72,14 @@ class TicTacToeActivity : AppCompatActivity() {
             showGameField()
             checkVictory(State.PLAYER)
             if (!checkVictory(State.PLAYER)) {
-                computerTurn()
+                var computerCoordinates = computerVictoryCheck()
+                if (computerCoordinates != null) {
+                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+                        State.COMPUTER
+                    println("!!! coordinate3")
+                } else {
+                    computerTurn()
+                }
             }
         }
         button4.setOnClickListener() {
@@ -65,7 +87,14 @@ class TicTacToeActivity : AppCompatActivity() {
             showGameField()
             checkVictory(State.PLAYER)
             if (!checkVictory(State.PLAYER)) {
-                computerTurn()
+                var computerCoordinates = computerVictoryCheck()
+                if (computerCoordinates != null) {
+                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+                        State.COMPUTER
+                    println("!!! coordinate4")
+                } else {
+                    computerTurn()
+                }
             }
         }
         button5.setOnClickListener() {
@@ -73,7 +102,14 @@ class TicTacToeActivity : AppCompatActivity() {
             showGameField()
             checkVictory(State.PLAYER)
             if (!checkVictory(State.PLAYER)) {
-                computerTurn()
+                var computerCoordinates = computerVictoryCheck()
+                if (computerCoordinates != null) {
+                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+                        State.COMPUTER
+                    println("!!! coordinate5")
+                } else {
+                    computerTurn()
+                }
             }
         }
         button6.setOnClickListener() {
@@ -81,7 +117,14 @@ class TicTacToeActivity : AppCompatActivity() {
             showGameField()
             checkVictory(State.PLAYER)
             if (!checkVictory(State.PLAYER)) {
-                computerTurn()
+                var computerCoordinates = computerVictoryCheck()
+                if (computerCoordinates != null) {
+                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+                        State.COMPUTER
+                    println("!!! coordinate6")
+                } else {
+                    computerTurn()
+                }
             }
         }
         button7.setOnClickListener() {
@@ -89,7 +132,14 @@ class TicTacToeActivity : AppCompatActivity() {
             showGameField()
             checkVictory(State.PLAYER)
             if (!checkVictory(State.PLAYER)) {
-                computerTurn()
+                var computerCoordinates = computerVictoryCheck()
+                if (computerCoordinates != null) {
+                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+                        State.COMPUTER
+                    println("!!! coordinate7")
+                } else {
+                    computerTurn()
+                }
             }
         }
         button8.setOnClickListener() {
@@ -98,7 +148,14 @@ class TicTacToeActivity : AppCompatActivity() {
             showGameField()
             checkVictory(State.PLAYER)
             if (!checkVictory(State.PLAYER)) {
-                computerTurn()
+                var computerCoordinates = computerVictoryCheck()
+                if (computerCoordinates != null) {
+                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+                        State.COMPUTER
+                    println("!!! coordinate8")
+                } else {
+                    computerTurn()
+                }
             }
         }
 
@@ -108,7 +165,14 @@ class TicTacToeActivity : AppCompatActivity() {
             showGameField()
             checkVictory(State.PLAYER)
             if (!checkVictory(State.PLAYER)) {
-                computerTurn()
+                var computerCoordinates = computerVictoryCheck()
+                if (computerCoordinates != null) {
+                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+                        State.COMPUTER
+                    println("!!! coordinate9")
+                } else {
+                    computerTurn()
+                }
             }
         }
 
@@ -137,7 +201,7 @@ class TicTacToeActivity : AppCompatActivity() {
         for (y in 0..2) {
             for (x in 0..2) {
                 indexButton++
-                    //println("!!! current index = x = $x $y")
+                //println("!!! current index = x = $x $y")
                 if (stateField.find { it.y == y && it.x == x }?.state == State.PLAYER) {
                     buttonList[indexButton].text = getString(R.string.tic_tac_toe_x)
                 }
@@ -236,14 +300,14 @@ class TicTacToeActivity : AppCompatActivity() {
 
         sum = sum + 20//35
 
-        if(sum==30){ // == антоним действию !=
+        if (sum == 30) { // == антоним действию !=
             println("qeqeerrtert")
         }
 
         println("sum = $sum")//35
     }
 
-   private fun computerTurn() {
+    private fun computerTurn() {
         val countStep = getCountStep()
         if (countStep == 1) {
             println("!!! computerTurn")
@@ -259,5 +323,24 @@ class TicTacToeActivity : AppCompatActivity() {
             showGameField()
         }
         println("!!! functionName $countStep")
+    }
+
+    fun computerVictoryCheck(): Coordinates? {
+        var count: Int = 0
+        var globalX: Int = 0
+        for (y in 0..20) {
+            for (x in 0..2) {
+                if (stateField.find { it.x == x && it.y == y }?.state == State.PLAYER) {
+                    count++
+                    globalX = x
+                    println("Count has been added")
+                }
+            }
+            if (count == 2) {
+                return Coordinates(coordinateX = globalX, coordinateY = y)
+            }
+        }
+
+        return null
     }
 }
