@@ -38,141 +38,40 @@ class TicTacToeActivity : AppCompatActivity() {
 
         button1.setOnClickListener() {
             stateField.find { it.x == 0 && it.y == 0 }?.state = State.PLAYER
-            showGameField()
-            checkVictory(State.PLAYER)
-            if (!checkVictory(State.PLAYER)) {
-                var computerCoordinates = computerVictoryCheck()
-                if (computerCoordinates != null) {
-                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
-                        State.COMPUTER
-                    println("!!! coordinate1")
-                } else {
-                    computerTurn()
-                }
-            }
+            onClickButtonAction("1")
         }
         button2.setOnClickListener() {
             stateField.find { it.x == 1 && it.y == 0 }?.state = State.PLAYER
-            showGameField()
-            checkVictory(State.PLAYER)
-            if (!checkVictory(State.PLAYER)) {
-                var computerCoordinates = computerVictoryCheck()
-                if (computerCoordinates != null) {
-                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
-                        State.COMPUTER
-                    println("!!! coordinate2")
-                } else {
-                    computerTurn()
-                }
-            }
+            onClickButtonAction("2")
         }
         button3.setOnClickListener() {
             stateField.find { it.x == 2 && it.y == 0 }?.state = State.PLAYER
-            showGameField()
-            checkVictory(State.PLAYER)
-            if (!checkVictory(State.PLAYER)) {
-                var computerCoordinates = computerVictoryCheck()
-                if (computerCoordinates != null) {
-                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
-                        State.COMPUTER
-                    println("!!! coordinate3")
-                } else {
-                    computerTurn()
-                }
-            }
+            onClickButtonAction("3")
         }
         button4.setOnClickListener() {
             stateField.find { it.x == 0 && it.y == 1 }?.state = State.PLAYER
-            showGameField()
-            checkVictory(State.PLAYER)
-            if (!checkVictory(State.PLAYER)) {
-                var computerCoordinates = computerVictoryCheck()
-                if (computerCoordinates != null) {
-                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
-                        State.COMPUTER
-                    println("!!! coordinate4")
-                } else {
-                    computerTurn()
-                }
-            }
+            onClickButtonAction("4")
         }
         button5.setOnClickListener() {
             stateField.find { it.x == 1 && it.y == 1 }?.state = State.PLAYER
-            showGameField()
-            checkVictory(State.PLAYER)
-            if (!checkVictory(State.PLAYER)) {
-                var computerCoordinates = computerVictoryCheck()
-                if (computerCoordinates != null) {
-                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
-                        State.COMPUTER
-                    println("!!! coordinate5")
-                } else {
-                    computerTurn()
-                }
-            }
+            onClickButtonAction("5")
         }
         button6.setOnClickListener() {
             stateField.find { it.x == 2 && it.y == 1 }?.state = State.PLAYER
-            showGameField()
-            checkVictory(State.PLAYER)
-            if (!checkVictory(State.PLAYER)) {
-                var computerCoordinates = computerVictoryCheck()
-                if (computerCoordinates != null) {
-                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
-                        State.COMPUTER
-                    println("!!! coordinate6")
-                } else {
-                    computerTurn()
-                }
-            }
+            onClickButtonAction("6")
         }
         button7.setOnClickListener() {
             stateField.find { it.x == 0 && it.y == 2 }?.state = State.PLAYER
-            showGameField()
-            checkVictory(State.PLAYER)
-            if (!checkVictory(State.PLAYER)) {
-                var computerCoordinates = computerVictoryCheck()
-                if (computerCoordinates != null) {
-                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
-                        State.COMPUTER
-                    println("!!! coordinate7")
-                } else {
-                    computerTurn()
-                }
-            }
+            onClickButtonAction("7")
         }
         button8.setOnClickListener() {
-
             stateField.find { it.x == 1 && it.y == 2 }?.state = State.PLAYER
-            showGameField()
-            checkVictory(State.PLAYER)
-            if (!checkVictory(State.PLAYER)) {
-                var computerCoordinates = computerVictoryCheck()
-                if (computerCoordinates != null) {
-                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
-                        State.COMPUTER
-                    println("!!! coordinate8")
-                } else {
-                    computerTurn()
-                }
-            }
+            onClickButtonAction("8")
         }
 
         button9.setOnClickListener() {
-            stateField.filter { it.x == 2 && it.y == 2 }
             stateField.find { it.x == 2 && it.y == 2 }?.state = State.PLAYER
-            showGameField()
-            checkVictory(State.PLAYER)
-            if (!checkVictory(State.PLAYER)) {
-                var computerCoordinates = computerVictoryCheck()
-                if (computerCoordinates != null) {
-                    stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
-                        State.COMPUTER
-                    println("!!! coordinate9")
-                } else {
-                    computerTurn()
-                }
-            }
+            onClickButtonAction("9")
         }
 
         restartButton.setOnClickListener() {
@@ -327,19 +226,61 @@ class TicTacToeActivity : AppCompatActivity() {
     private fun computerVictoryCheck(): Coordinates? {
         var count: Int = 0
         var globalX: Int = 0
+        var globalY: Int = 0
         for (y in 0..20) {
             for (x in 0..2) {
                 if (stateField.find { it.x == x && it.y == y }?.state == State.PLAYER) {
                     count++
-                    globalX = x
                     println("Count has been added")
+                } else {
+                    globalX = x
+                    globalY = y
+
                 }
             }
             if (count == 2) {
-                return Coordinates(coordinateX = globalX, coordinateY = y)
+                println("!!! Coordinate X = $globalX    Coordinate Y = $globalY")
+                return Coordinates(coordinateX = globalX, coordinateY = globalY)
+            } else {
+                count = 0
+            }
+        }
+        for (x in 0..20) {
+            for (y in 0..2) {
+                if (stateField.find { it.x == x && it.y == y }?.state == State.PLAYER) {
+                    count++
+                    println("Count has been added")
+                } else {
+                    globalX = x
+                    globalY = y
+
+                }
+            }
+            if (count == 2) {
+                println("!!! Coordinate X = $globalX    Coordinate Y = $globalY")
+                return Coordinates(coordinateX = globalX, coordinateY = globalY)
+            } else {
+                count = 0
             }
         }
 
         return null
+    }
+
+    fun onClickButtonAction(nameButton: String) {
+        println("!!! Button $nameButton clicked")
+        showGameField()
+        checkVictory(State.PLAYER)
+        if (!checkVictory(State.PLAYER)) {
+            var computerCoordinates = computerVictoryCheck()
+            if (computerCoordinates != null) {
+                stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+                    State.COMPUTER
+                println("!!! Coordinate $nameButton ")
+            } else {
+                computerTurn()
+            }
+        }
+        showGameField()
     }
 }
