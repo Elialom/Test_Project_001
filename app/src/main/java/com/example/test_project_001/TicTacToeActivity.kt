@@ -46,8 +46,7 @@ class TicTacToeActivity : AppCompatActivity() {
                     stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
                         State.COMPUTER
                     println("!!! coordinate1")
-                }
-                else {
+                } else {
                     computerTurn()
                 }
             }
@@ -325,7 +324,7 @@ class TicTacToeActivity : AppCompatActivity() {
         println("!!! functionName $countStep")
     }
 
-    fun computerVictoryCheck(): Coordinates? {
+    private fun computerVictoryCheck(): Coordinates? {
         var count: Int = 0
         var globalX: Int = 0
         for (y in 0..20) {
