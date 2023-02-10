@@ -37,41 +37,32 @@ class TicTacToeActivity : AppCompatActivity() {
         createEmptyState()
 
         button1.setOnClickListener() {
-            stateField.find { it.x == 0 && it.y == 0 }?.state = State.PLAYER
-            onClickButtonAction("1")
+            onClickButtonAction("1", 0, 0)
         }
         button2.setOnClickListener() {
-            stateField.find { it.x == 1 && it.y == 0 }?.state = State.PLAYER
-            onClickButtonAction("2")
+            onClickButtonAction("2", 1, 0)
         }
         button3.setOnClickListener() {
-            stateField.find { it.x == 2 && it.y == 0 }?.state = State.PLAYER
-            onClickButtonAction("3")
+            onClickButtonAction("3", 2, 0)
         }
         button4.setOnClickListener() {
-            stateField.find { it.x == 0 && it.y == 1 }?.state = State.PLAYER
-            onClickButtonAction("4")
+            onClickButtonAction("4", 0, 1)
         }
         button5.setOnClickListener() {
-            stateField.find { it.x == 1 && it.y == 1 }?.state = State.PLAYER
-            onClickButtonAction("5")
+            onClickButtonAction("5", 1, 1)
         }
         button6.setOnClickListener() {
-            stateField.find { it.x == 2 && it.y == 1 }?.state = State.PLAYER
-            onClickButtonAction("6")
+            onClickButtonAction("6", 2, 1)
         }
         button7.setOnClickListener() {
-            stateField.find { it.x == 0 && it.y == 2 }?.state = State.PLAYER
-            onClickButtonAction("7")
+            onClickButtonAction("7", 0, 2)
         }
         button8.setOnClickListener() {
-            stateField.find { it.x == 1 && it.y == 2 }?.state = State.PLAYER
-            onClickButtonAction("8")
+            onClickButtonAction("8", 1, 2)
         }
 
         button9.setOnClickListener() {
-            stateField.find { it.x == 2 && it.y == 2 }?.state = State.PLAYER
-            onClickButtonAction("9")
+            onClickButtonAction("9", 2, 2)
         }
 
         restartButton.setOnClickListener() {
@@ -90,7 +81,9 @@ class TicTacToeActivity : AppCompatActivity() {
             PlayableCell(0, 2, State.EMPTY),
             PlayableCell(1, 2, State.EMPTY),
             PlayableCell(2, 2, State.EMPTY)
+
         )
+        showGameField()
     }
 
     private fun showGameField() {
@@ -227,7 +220,7 @@ class TicTacToeActivity : AppCompatActivity() {
         var count: Int = 0
         var globalX: Int = 0
         var globalY: Int = 0
-        for (y in 0..20) {
+        for (y in 0..2) {
             for (x in 0..2) {
                 if (stateField.find { it.x == x && it.y == y }?.state == State.PLAYER) {
                     count++
@@ -235,7 +228,7 @@ class TicTacToeActivity : AppCompatActivity() {
                 } else {
                     globalX = x
                     globalY = y
-
+                    println("!!! Coordinate X and Y changed  X = $globalX Y = $globalY  $count")
                 }
             }
             if (count == 2) {
@@ -245,7 +238,7 @@ class TicTacToeActivity : AppCompatActivity() {
                 count = 0
             }
         }
-        for (x in 0..20) {
+        for (x in 0..2) {
             for (y in 0..2) {
                 if (stateField.find { it.x == x && it.y == y }?.state == State.PLAYER) {
                     count++
@@ -253,7 +246,7 @@ class TicTacToeActivity : AppCompatActivity() {
                 } else {
                     globalX = x
                     globalY = y
-
+                    println("!!! Coordinate X and Y changed  X = $globalX Y = $globalY  $count")
                 }
             }
             if (count == 2) {
@@ -264,11 +257,71 @@ class TicTacToeActivity : AppCompatActivity() {
             }
         }
 
+        for (a in 0..2) {
+            if (stateField.find { it.x == a && it.y == a }?.state == State.PLAYER) {
+                count++
+                println("Count has been added")
+            } else {
+                globalX = a
+                globalY = a
+                println("!!! Coordinate X and Y changed  X = $globalX Y = $globalY  $count")
+            }
+        }
+        if (count == 2) {
+            println("!!! Coordinate X = $globalX    Coordinate Y = $globalY")
+            return Coordinates(coordinateX = globalX, coordinateY = globalY)
+        } else {
+            count = 0
+        }
+//         for (x in 2 downTo 0) {
+//            for (y in 0..2) {
+//                if (stateField.find { it.x == x && it.y == y }?.state == State.PLAYER) {
+//                    count++
+//                    println("Count has been added")
+//                } else {
+//                    globalX = x
+//                    globalY = y
+//                    println("!!! Coordinate X and Y changed  X = $globalX Y = $globalY  $count")
+//                }
+//            }
+//        if (count == 2) {
+//            println("!!! Coordinate X = $globalX    Coordinate Y = $globalY")
+//            return Coordinates(coordinateX = globalX, coordinateY = globalY)
+//        } else {
+//            count = 0
+//        }
+//    }
+        var countDiagonal: Int = 0
+        if (stateField.find { it.x == 2 && it.y == 0 }?.state == State.PLAYER) {
+            countDiagonal++
+        } else {
+            globalX = 2
+            globalY = 0
+        }
+        if (stateField.find { it.x == 1 && it.y == 1 }?.state == State.PLAYER) {
+            countDiagonal++
+        } else {
+            globalX = 1
+            globalY = 1
+        }
+        if (stateField.find { it.x == 0 && it.y == 2 }?.state == State.PLAYER) {
+            countDiagonal++
+        } else {
+            globalX = 0
+            globalY = 2
+        }
+        if (countDiagonal == 2) {
+            return Coordinates(globalX, globalY)
+        }
+
         return null
     }
 
-    fun onClickButtonAction(nameButton: String) {
+    fun onClickButtonAction(nameButton: String, x: Int, y: Int) {
         println("!!! Button $nameButton clicked")
+        if (stateField.find { it.x == x && it.y == y }?.state == State.EMPTY) {
+            stateField.find { it.x == x && it.y == y }?.state = State.PLAYER
+        }
         showGameField()
         checkVictory(State.PLAYER)
         if (!checkVictory(State.PLAYER)) {
