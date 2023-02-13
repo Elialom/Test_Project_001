@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 
@@ -30,12 +31,14 @@ class MainActivity : AppCompatActivity() {
         }
         loginEt.addTextChangedListener {
             printInfo("User is typing login details")
-            authorizationButton.isEnabled = loginEt.text.isNotEmpty() && authorizationPassEt.text.isNotEmpty()
+            authorizationButton.isEnabled =
+                loginEt.text.isNotEmpty() && authorizationPassEt.text.isNotEmpty()
 
         }
         authorizationPassEt.addTextChangedListener {
             printInfo("User is typing password")
-            authorizationButton.isEnabled = loginEt.text.isNotEmpty() && authorizationPassEt.text.isNotEmpty()
+            authorizationButton.isEnabled =
+                loginEt.text.isNotEmpty() && authorizationPassEt.text.isNotEmpty()
         }
         aboutApplicationTextView.setOnClickListener() {
             printInfo("User clicked on Registration Button")
@@ -62,6 +65,15 @@ class MainActivity : AppCompatActivity() {
         anyString: List<String>
     ) {
         println("!!! ${anyString}")
+    }
+
+
+    fun showMessage(text:String) {
+
+        val duration = Toast.LENGTH_SHORT
+
+        val toast = Toast.makeText(applicationContext, text, duration)
+        toast.show()
     }
 
 
