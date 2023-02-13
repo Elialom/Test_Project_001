@@ -22,4 +22,6 @@
     <string name="tic_tac_toe_o">O</string>
     <string name="tic_tac_toe_start_button">Restart</string>
     <string name="tic_tac_toe_empty"></string>
+    <string name="ttt_player_win">Player won</string>
+    <string name="ttt_computer_win">Computer won</string>
 </resources>
