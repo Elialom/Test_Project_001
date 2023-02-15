@@ -183,6 +183,45 @@ class TicTacToeActivity : AppCompatActivity() {
         return false
     }
 
+    /**
+     * Field check for both players before victory situation
+     */
+    private fun checkField(
+        typePlayer: State,
+        checkFieldType: CheckFieldType
+    ):CheckFieldResults {
+        var count: Int = 0
+        var globalX: Int = 0
+        var globalY: Int = 0
+        for (y in 0..20) {
+            for (x in 0..2) {
+                if (stateField.find { it.x == x && it.y == y }?.state == typePlayer) {//State/COMPUTER// null
+                    count++
+                    println("Count has been added")
+                } else if (stateField.find { it.x == x && it.y == y}?.state == State.EMPTY) {
+                    globalX = x
+                    globalY = y
+                }
+
+
+            }
+            if (count == checkFieldType.countCheckCell) {
+                if (typePlayer == State.COMPUTER) {
+                    showMessage(getString(R.string.ttt_computer_win))
+                } else {
+                    showMessage(getString(R.string.ttt_player_win))
+                }
+                //createEmptyState()
+                showGameField()
+                count = 0
+                return CheckFieldResults(Coordinates(globalX, globalY), checkFieldType)
+            } else {
+                count = 0
+            }
+        }
+        return CheckFieldResults(null, checkFieldType)
+    }
+
     private fun getCountStep(): Int {
         println("!!! getCountStep")
         var countStep: Int = 0
@@ -204,25 +243,25 @@ class TicTacToeActivity : AppCompatActivity() {
             println("!!! computerTurn")
             if (stateField.find { it.x == 1 && it.y == 1 }?.state == State.PLAYER) {
                 println("!!! computer step 1")
-                stateField.find { it.x == 0 && it.y == 1 }?.state = State.COMPUTER
+                makeMove(Coordinates(0, 1), typePlayer = State.COMPUTER)
             } else {
                 println("!!! computer step 2")
-                stateField.find { it.x == 1 && it.y == 1 }?.state = State.COMPUTER
+                makeMove(Coordinates(1, 1), typePlayer = State.COMPUTER)
             }
 
             println("!!! state cell ${stateField.find { it.x == 1 && it.y == 1 }?.state}")
-            showGameField()
         } else {
-            val computerCoordinates = playerVictoryCheck(typePlayer = State.COMPUTER)
-            println("!!! Computer $computerCoordinates")
-            if (computerCoordinates != null) {
-                stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+            val checkFieldResults = checkField(typePlayer = State.COMPUTER, CheckFieldType.PRE_WIN_SITUATION)
+            println("!!! Computer $checkFieldResults")
+            if (checkFieldResults.coordinates != null) {
+                makeMove(
+                    checkFieldResults.coordinates,
                     State.COMPUTER
-                showGameField()
+                )
             }
         }
         println("!!! functionName $countStep")
-        checkVictory(State.COMPUTER)
+//        checkVictory(State.COMPUTER)
     }
 
     /**
@@ -334,20 +373,24 @@ class TicTacToeActivity : AppCompatActivity() {
     private fun onClickButtonAction(nameButton: String, x: Int, y: Int) {
         println("!!! Button $nameButton clicked")
         if (stateField.find { it.x == x && it.y == y }?.state == State.EMPTY) {
-            stateField.find { it.x == x && it.y == y }?.state = State.PLAYER
+            makeMove(Coordinates(x, y), typePlayer = State.PLAYER)
         }
         showGameField()
-        checkVictory(State.PLAYER)
+        //
         if (!checkVictory(State.PLAYER)) {
             var computerCoordinates = playerVictoryCheck(typePlayer = State.PLAYER)
             if (computerCoordinates != null) {
-                stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
-                    State.COMPUTER
+                makeMove(
+                    Coordinates(
+                        computerCoordinates.coordinateX,
+                        computerCoordinates.coordinateY
+                    ), typePlayer = State.COMPUTER
+                )
                 checkVictory(State.COMPUTER)
                 println("!!! Coordinate $nameButton ")
             } else {
                 computerTurn()
-            }
+           }
         }
         showGameField()
     }
@@ -359,5 +402,17 @@ class TicTacToeActivity : AppCompatActivity() {
 
         val toast = Toast.makeText(applicationContext, text, duration)
         toast.show()
+    }
+
+    /**
+     * Computer/Player makes move
+     */
+    private fun makeMove(
+        computerCoordinates: Coordinates,
+        typePlayer: State
+    ) {
+        stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+            typePlayer
+        showGameField()
     }
 }
