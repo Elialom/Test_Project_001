@@ -9,7 +9,6 @@ class TicTacToeActivity : AppCompatActivity() {
 
     private var stateField: MutableList<PlayableCell> = mutableListOf()
 
-
     var buttonList: MutableList<Button> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -199,22 +198,6 @@ class TicTacToeActivity : AppCompatActivity() {
 
     }
 
-
-    fun example() {
-
-        var sum = 0//0
-        //user do
-        sum += 15//15
-
-        sum = sum + 20//35
-
-        if (sum == 30) { // == антоним действию !=
-            println("qeqeerrtert")
-        }
-
-        println("sum = $sum")//35
-    }
-
     private fun computerTurn() {
         val countStep = getCountStep()
         if (countStep == 1) {
@@ -233,7 +216,8 @@ class TicTacToeActivity : AppCompatActivity() {
             val computerCoordinates = playerVictoryCheck(typePlayer = State.COMPUTER)
             println("!!! Computer $computerCoordinates")
             if (computerCoordinates != null) {
-                stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state = State.COMPUTER
+                stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+                    State.COMPUTER
                 showGameField()
             }
         }
@@ -347,7 +331,7 @@ class TicTacToeActivity : AppCompatActivity() {
         return null
     }
 
-    fun onClickButtonAction(nameButton: String, x: Int, y: Int) {
+    private fun onClickButtonAction(nameButton: String, x: Int, y: Int) {
         println("!!! Button $nameButton clicked")
         if (stateField.find { it.x == x && it.y == y }?.state == State.EMPTY) {
             stateField.find { it.x == x && it.y == y }?.state = State.PLAYER
@@ -369,7 +353,7 @@ class TicTacToeActivity : AppCompatActivity() {
     }
 
 
-    fun showMessage(text: String) {
+    private fun showMessage(text: String) {
 
         val duration = Toast.LENGTH_SHORT
 
