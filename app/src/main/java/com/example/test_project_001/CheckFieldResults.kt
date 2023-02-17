@@ -7,5 +7,5 @@ package com.example.test_project_001
  */
 data class CheckFieldResults(
     val coordinates: Coordinates?,
-    val checkFieldType: CheckFieldType
+    val checkFieldType: CheckFieldType?
 )
