@@ -212,15 +212,6 @@ class TicTacToeActivity : AppCompatActivity() {
 
             }
             if (count == checkFieldType.countCheckCell) {
-//                if (typePlayer == State.COMPUTER) {
-//                    showMessage(getString(R.string.ttt_computer_win))
-//                } else {
-//                    showMessage(getString(R.string.ttt_player_win))
-//                }
-//                //createEmptyState()
-//                showGameField()
-//                count = 0
-//                return CheckFieldResults(Coordinates(globalX, globalY), checkFieldType)
                 when (checkFieldType) {
                     CheckFieldType.WIN_SITUATION -> {
                         checkFieldType1 = CheckFieldType.WIN_SITUATION
@@ -232,10 +223,9 @@ class TicTacToeActivity : AppCompatActivity() {
                 }
                 if (checkFieldType == CheckFieldType.WIN_SITUATION || (checkFieldType == CheckFieldType.PRE_WIN_SITUATION && !isCellTaken)) {
                     return CheckFieldResults(coordinates, checkFieldType1)
-                } else {
-                    count = 0
                 }
             }
+            count = 0
         }
         return CheckFieldResults(null, checkFieldType)
     }
