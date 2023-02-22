@@ -227,9 +227,65 @@ class TicTacToeActivity : AppCompatActivity() {
             }
             count = 0
         }
+        for (x in 0..2) {
+            var isCellTaken = true
+            for (y in 0..2) {
+                if (stateField.find { it.x == x && it.y == y }?.state == typePlayer) {//State/COMPUTER// null
+                    println("!!! a2")
+                    count++
+                    println("Count has been added")
+                } else if (stateField.find { it.x == x && it.y == y }?.state == State.EMPTY) {
+                    isCellTaken = false
+                    globalX = x
+                    globalY = y
+                }
+
+
+            }
+            if (count == checkFieldType.countCheckCell) {
+                when (checkFieldType) {
+                    CheckFieldType.WIN_SITUATION -> {
+                        checkFieldType1 = CheckFieldType.WIN_SITUATION
+                    }
+                    CheckFieldType.PRE_WIN_SITUATION -> {
+                        checkFieldType1 = CheckFieldType.PRE_WIN_SITUATION
+                        coordinates = Coordinates(globalX, globalY)
+                    }
+                }
+                if (checkFieldType == CheckFieldType.WIN_SITUATION || (checkFieldType == CheckFieldType.PRE_WIN_SITUATION && !isCellTaken)) {
+                    return CheckFieldResults(coordinates, checkFieldType1)
+                }
+            }
+            count = 0
+        }
+        for (x in 0..2) {
+            if (stateField.find { it.x == x && it.y == x }?.state == typePlayer) {
+                count++
+            } else if (stateField.find { it.x == x && it.y == x }?.state == State.EMPTY) {
+                globalX = x
+                globalY = x
+            }
+        }
+        if (count == checkFieldType.countCheckCell) {
+            when (checkFieldType) {
+                CheckFieldType.WIN_SITUATION -> {
+                    checkFieldType1 = CheckFieldType.WIN_SITUATION
+                }
+                CheckFieldType.PRE_WIN_SITUATION -> {
+                    checkFieldType1 = CheckFieldType.PRE_WIN_SITUATION
+                    coordinates = Coordinates(globalX, globalY)
+                }
+            }
+            if (checkFieldType == CheckFieldType.WIN_SITUATION || (checkFieldType == CheckFieldType.PRE_WIN_SITUATION)) {
+                return CheckFieldResults(Coordinates(globalX, globalY), checkFieldType1)
+            }
+        }
         return CheckFieldResults(null, checkFieldType)
     }
 
+    /**
+     * Function to return count step
+     */
     private fun getCountStep(): Int {
         println("!!! getCountStep")
         var countStep: Int = 0
