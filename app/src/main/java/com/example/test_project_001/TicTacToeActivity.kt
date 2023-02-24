@@ -69,6 +69,14 @@ class TicTacToeActivity : AppCompatActivity() {
             createEmptyState()
         }
     }
+    val diagonalCoordinates = listOf<Coordinates>(
+        Coordinates(0, 0),
+        Coordinates(2, 0),
+        Coordinates(0, 2),
+        Coordinates(2, 2)
+    )
+    //0,0 2,0 0,2 2,2
+
 
     private fun createEmptyState() {
         stateField = mutableListOf<PlayableCell>(
@@ -280,7 +288,41 @@ class TicTacToeActivity : AppCompatActivity() {
                 return CheckFieldResults(Coordinates(globalX, globalY), checkFieldType1)
             }
         }
-        return CheckFieldResults(null, checkFieldType)
+        //2,0 1,1 0,2
+        count = 0
+        if (stateField.find { it.x == 2 && it.y == 0 }?.state == typePlayer) {
+            count++
+        } else if (stateField.find { it.x == 2 && it.y == 0 }?.state == State.EMPTY) {
+            globalX = 2
+            globalY = 0
+        }
+        if (stateField.find { it.x == 1 && it.y == 1 }?.state == typePlayer) {
+            count++
+        } else if (stateField.find { it.x == 1 && it.y == 1 }?.state == State.EMPTY) {
+            globalX = 1
+            globalY = 1
+        }
+        if (stateField.find { it.x == 0 && it.y == 2 }?.state == typePlayer) {
+            count++
+        } else if (stateField.find { it.x == 0 && it.y == 2 }?.state == State.EMPTY) {
+            globalX = 0
+            globalY = 2
+        }
+        if (count == checkFieldType.countCheckCell) {
+            when (checkFieldType) {
+                CheckFieldType.WIN_SITUATION -> {
+                    checkFieldType1 = CheckFieldType.WIN_SITUATION
+                }
+                CheckFieldType.PRE_WIN_SITUATION -> {
+                    checkFieldType1 = CheckFieldType.PRE_WIN_SITUATION
+                    coordinates = Coordinates(globalX, globalY)
+                }
+            }
+            if (checkFieldType == CheckFieldType.WIN_SITUATION || (checkFieldType == CheckFieldType.PRE_WIN_SITUATION)) {
+                return CheckFieldResults(coordinates, checkFieldType1)
+            }
+        }
+        return CheckFieldResults(null, null)
     }
 
     /**
@@ -308,7 +350,7 @@ class TicTacToeActivity : AppCompatActivity() {
             println("!!! computerTurn")
             if (stateField.find { it.x == 1 && it.y == 1 }?.state == State.PLAYER) {
                 println("!!! computer step 1")
-                makeMove(Coordinates(0, 1), typePlayer = State.COMPUTER)
+                makeMove(diagonalCoordinates.random(), typePlayer = State.COMPUTER)
             } else {
                 println("!!! computer step 2")
                 makeMove(Coordinates(1, 1), typePlayer = State.COMPUTER)
@@ -334,108 +376,7 @@ class TicTacToeActivity : AppCompatActivity() {
     /**
      * Checks if computer has to do a move so that the player does not win
      */
-//    private fun playerVictoryCheck(
-//        typePlayer: State
-//    ): Coordinates? {
-//        var count: Int = 0
-//        var globalX: Int = 0
-//        var globalY: Int = 0
-//        for (y in 0..2) {
-//            for (x in 0..2) {
-//                if (stateField.find { it.x == x && it.y == y }?.state == typePlayer) {
-//                    count++
-//                    println("Count has been added")
-//                } else {
-//                    globalX = x
-//                    globalY = y
-//                    println("!!! Coordinate X and Y changed  X = $globalX Y = $globalY  $count")
-//                }
-//            }
-//            if (count == 2) {
-//                println("!!! Coordinate X = $globalX    Coordinate Y = $globalY")
-//                return Coordinates(coordinateX = globalX, coordinateY = globalY)
-//            } else {
-//                count = 0
-//            }
-//        }
-//        for (x in 0..2) {
-//            for (y in 0..2) {
-//                if (stateField.find { it.x == x && it.y == y }?.state == typePlayer) {
-//                    count++
-//                    println("Count has been added")
-//                } else {
-//                    globalX = x
-//                    globalY = y
-//                    println("!!! Coordinate X and Y changed  X = $globalX Y = $globalY  $count")
-//                }
-//            }
-//            if (count == 2) {
-//                println("!!! Coordinate X = $globalX    Coordinate Y = $globalY")
-//                return Coordinates(coordinateX = globalX, coordinateY = globalY)
-//            } else {
-//                count = 0
-//            }
-//        }
-//
-//        for (a in 0..2) {
-//            if (stateField.find { it.x == a && it.y == a }?.state == typePlayer) {
-//                count++
-//                println("Count has been added")
-//            } else {
-//                globalX = a
-//                globalY = a
-//                println("!!! Coordinate X and Y changed  X = $globalX Y = $globalY  $count")
-//            }
-//        }
-//        if (count == 2) {
-//            println("!!! Coordinate X = $globalX    Coordinate Y = $globalY")
-//            return Coordinates(coordinateX = globalX, coordinateY = globalY)
-//        } else {
-//            count = 0
-//        }
-////         for (x in 2 downTo 0) {
-////            for (y in 0..2) {
-////                if (stateField.find { it.x == x && it.y == y }?.state == State.PLAYER) {
-////                    count++
-////                    println("Count has been added")
-////                } else {
-////                    globalX = x
-////                    globalY = y
-////                    println("!!! Coordinate X and Y changed  X = $globalX Y = $globalY  $count")
-////                }
-////            }
-////        if (count == 2) {
-////            println("!!! Coordinate X = $globalX    Coordinate Y = $globalY")
-////            return Coordinates(coordinateX = globalX, coordinateY = globalY)
-////        } else {
-////            count = 0
-////        }
-////    }
-//        var countDiagonal: Int = 0
-//        if (stateField.find { it.x == 2 && it.y == 0 }?.state == typePlayer) {
-//            countDiagonal++
-//        } else {
-//            globalX = 2
-//            globalY = 0
-//        }
-//        if (stateField.find { it.x == 1 && it.y == 1 }?.state == typePlayer) {
-//            countDiagonal++
-//        } else {
-//            globalX = 1
-//            globalY = 1
-//        }
-//        if (stateField.find { it.x == 0 && it.y == 2 }?.state == typePlayer) {
-//            countDiagonal++
-//        } else {
-//            globalX = 0
-//            globalY = 2
-//        }
-//        if (countDiagonal == 2) {
-//            return Coordinates(globalX, globalY)
-//        }
-//
-//        return null
-//    }
+
 
     private fun onClickButtonAction(nameButton: String, x: Int, y: Int) {
         println("!!! Button $nameButton clicked")
@@ -453,6 +394,12 @@ class TicTacToeActivity : AppCompatActivity() {
             computerTurn()
         }
         showGameField()
+        if (checkField(typePlayer = State.PLAYER, CheckFieldType.WIN_SITUATION).checkFieldType == CheckFieldType.WIN_SITUATION) {
+            showMessage(getString(R.string.ttt_player_win))
+        }
+        if (checkField(typePlayer = State.COMPUTER, CheckFieldType.WIN_SITUATION).checkFieldType == CheckFieldType.WIN_SITUATION) {
+            showMessage(getString(R.string.ttt_computer_win))
+        }
     }
 
 
@@ -471,8 +418,10 @@ class TicTacToeActivity : AppCompatActivity() {
         computerCoordinates: Coordinates,
         typePlayer: State
     ) {
-        stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
-            typePlayer
-        showGameField()
+        if (stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state == State.EMPTY) {
+            stateField.find { it.x == computerCoordinates.coordinateX && it.y == computerCoordinates.coordinateY }?.state =
+                typePlayer
+            showGameField()
+        }
     }
 }
